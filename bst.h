@@ -60,6 +60,8 @@ sNode* search(bst *t, int x) {
 }
 */
 void inorder(sNode *pPointer) {
+	if (pPointer == NULL)
+		return;
 	inorder(pPointer->pLeft);
 	printf("%d ", pPointer->data);
 	inorder(pPointer->pRight);
