@@ -18,11 +18,16 @@ typedef struct {
 } bst;
 
 bst* create() {
-	// Your code here
+	bst t;
+	t.pRoot = NULL;
+	bst *ptrT = &t;
+	
+	return ptrT;
 }
 
 void insert(bst *t, int x) {
-	// Your code here
+	sNode *y = NULL;
+	sNode *x = t->pRoot;
 }
 
 sNode* search(bst *t, int x) {
