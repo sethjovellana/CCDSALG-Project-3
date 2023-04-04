@@ -66,15 +66,23 @@ void inorder(sNode *pPointer) {
 	printf("%d ", pPointer->data);
 	inorder(pPointer->pRight);
 }
-/*
+
 void preorder(sNode *pPointer) {
-	// Your code here
+	if (pPointer == NULL)
+		return;
+	printf("%d ", pPointer->data);
+	preorder(pPointer->pLeft);
+	preorder(pPointer->pRight);
 }
 
 void postorder(sNode *pPointer) {
-	// Your code here
+	if (pPointer == NULL)
+		return;
+	postorder(pPointer->pLeft);
+	postorder(pPointer->pRight);
+	printf("%d ", pPointer->data);
 }
-
+/*
 sNode* maximum(sNode *pPointer) {
 	// Your code here
 }
