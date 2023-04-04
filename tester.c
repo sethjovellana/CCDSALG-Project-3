@@ -14,6 +14,19 @@ int main(){
 	preorder(tree->pRoot);
 	printf("\n");
 	postorder(tree->pRoot);
+	printf("\n");
+	
+	// search function test cases:
+	sNode *key = search(tree, 90);
+	printf("%d", key->data);
+	printf("\n");
+	
+	sNode *key2 = search(tree, 75);
+	printf("%d", key2->data);
+	printf("\n");
+	
+	sNode *key3 = search(tree, 100);
+	printf("%d", key3->data); // prints blank/null because key doesn't exist.
 	return 0;
 }
 
