@@ -10,6 +10,10 @@ int main(){
 	insert(tree, 75);	
 	
 	inorder(tree->pRoot);
+	printf("\n");
+	preorder(tree->pRoot);
+	printf("\n");
+	postorder(tree->pRoot);
 	return 0;
 }
 
