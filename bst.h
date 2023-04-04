@@ -18,16 +18,14 @@ typedef struct {
 } bst;
 
 bst* create() {
-	bst t;
-	t.pRoot = NULL;
-	bst *ptrT = &t;
+	bst *t = malloc(sizeof(bst));	
+	t->pRoot = NULL;
 	
-	return ptrT;
+	return t;
 }
 
 void insert(bst *t, int x) {
-	sNode *newNode;
-	newNode = malloc(sizeof(sNode));
+	sNode *newNode = malloc(sizeof(sNode));
 	newNode->data = x;
 	newNode->pLeft = NULL;
 	newNode->pRight = NULL;
