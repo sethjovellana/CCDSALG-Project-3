@@ -63,7 +63,6 @@ sNode* search(bst *t, int x) {
 */
 void inorder(sNode *pPointer) {
 	inorder(pPointer->pLeft);
-	printf("%d", 1);
 	printf("%d ", pPointer->data);
 	inorder(pPointer->pRight);
 }
