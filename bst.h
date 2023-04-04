@@ -26,18 +26,48 @@ bst* create() {
 }
 
 void insert(bst *t, int x) {
-	sNode *y = NULL;
-	sNode *x = t->pRoot;
+	sNode *newNode;
+	newNode = malloc(sizeof(sNode));
+	newNode->data = x;
+	newNode->pLeft = NULL;
+	newNode->pRight = NULL;
+	
+	if (t->pRoot == NULL){
+		t->pRoot = newNode;
+	}
+	
+	else{
+		sNode *prev = NULL;
+		sNode *temp = t->pRoot;
+		
+		while (temp != NULL){
+			if (temp->data > x){
+				prev = temp;
+				temp = temp->pLeft;
+			}
+			else if (temp->data < x){
+				prev = temp;
+				temp = temp->pRight;
+			}
+		}
+		if (prev->data > x)
+			prev->pLeft = newNode;
+		else
+			prev->pRight = newNode;
+	}
 }
-
+/*
 sNode* search(bst *t, int x) {
 	// Your code here
 }
-
+*/
 void inorder(sNode *pPointer) {
-	// Your code here
+	inorder(pPointer->pLeft);
+	printf("%d", 1);
+	printf("%d ", pPointer->data);
+	inorder(pPointer->pRight);
 }
-
+/*
 void preorder(sNode *pPointer) {
 	// Your code here
 }
@@ -65,3 +95,4 @@ sNode* successor(bst *t, int x) {
 sNode* predecessor(bst *t, int x) {
 	// Your code here
 }
+*/
