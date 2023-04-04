@@ -54,11 +54,19 @@ void insert(bst *t, int x) {
 			prev->pRight = newNode;
 	}
 }
-/*
+
 sNode* search(bst *t, int x) {
-	// Your code here
+	sNode *root = t->pRoot;
+	while (root != NULL && root->data != x){
+		
+		if (x < root->data)
+			root = root->pLeft;
+		else 
+			root = root->pRight;
+	}
+	return root;
 }
-*/
+
 void inorder(sNode *pPointer) {
 	if (pPointer == NULL)
 		return;
