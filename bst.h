@@ -131,8 +131,6 @@ sNode* successor(bst *t, int x) {
 	// looks for the parent
 	sNode* p = parent(t, x);
 
-	int p2;
-
 	while(p != NULL && x == p->pRight){
 		x = p;
 		p = parent(t,p);
@@ -156,8 +154,6 @@ sNode* predecessor(bst *t, int x) {
 
 	// looks for the parent
 	sNode* p = parent(t, x);
-
-	int p2;
 
 	while(p != NULL && x == p->pRight){
 		x = p;
