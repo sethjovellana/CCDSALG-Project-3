@@ -98,15 +98,15 @@ sNode* maximum(sNode *pPointer) {
 	x = right of x;
 	return x;
 	*/
-	if (pPointer == NULL)
-		return NULL;
-
-	sNode *pTemp = NULL;
-	while (pPointer->pRight != NULL){
-		pTemp = pPointer->pRight;
+	if(pPointer == NULL){
+        return NULL; //no value in the tree
 	}
-
-	return pTemp;
+    else if(pPointer -> pRight == NULL){
+        return pPointer; //no more right subtree meaning max is found
+	}
+    else {
+        return maximum(pPointer->pRight); //iterates until max is found
+	}
 }
 
 
@@ -117,45 +117,50 @@ sNode* minimum(sNode *pPointer) {
 	x = left of x;
 	return x;
 	*/
-	if (pPointer == NULL)
-		return NULL;
-
-	sNode *pTemp = NULL;
-	while (pPointer->pLeft != NULL){
-		pTemp = pPointer->pLeft;
+	if(pPointer == NULL) {
+        return NULL; //no value in the tree
 	}
-
-	return pTemp; 
+    else if(pPointer -> pLeft == NULL) {
+        return pPointer; //no more left subtree meaning min is found
+	}
+    else {
+        return minimum(pPointer->pLeft); //iterates until min is found
+	}
 }
 
 sNode* parent(bst *t, int x) {
-	// Your code here
-	// cases
-	// children -> parent [put]
-	// root node -> null [put]
-	// null tree -> null
-	// no node -> null
+	// // Your code here
+	// // cases
+	// // children -> parent [put]
+	// // root node -> null [put]
+	// // null tree -> null
+	// // no node -> null
 
-	/*
-	y = parent of x
-	while(y!= NULL  && x == right of y){
-		x = y
-		y = parent of y; 
-	}
+	// /*
+	// y = parent of x
+	// while(y!= NULL  && x == right of y){
+	// 	x = y
+	// 	y = parent of y; 
+	// }
 
-	return y
-	*/
+	// return y
+	// */
 
+
+	sNode *root = t->pRoot;	
+	if(root == NULL)
+		return NULL;
+	
 	sNode *tempParent = NULL;
 	
-	while(t != NULL) {
-		if(x < t->pRoot){ //if values is less than root node
-			tempParent = t; //var will be the right subtree
-			t = tempParent->pLeft;
+	while(root != NULL) {
+		if(x < root->data){ //if value is less than node
+			tempParent = root; 
+			root = root->pLeft;
 
-		} else if (x > t->pRoot){
-			tempParent = t;
-			t = tempParent->pRight;
+		} else if (x > root->data){ //if value is more than node
+			tempParent = root;
+			root = root->pRight;
 		} else { 
 			break;
 		}
@@ -163,6 +168,8 @@ sNode* parent(bst *t, int x) {
 	}
 
 	return tempParent;
+
+
 
 }
 
