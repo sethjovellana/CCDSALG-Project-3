@@ -18,29 +18,79 @@ typedef struct {
 } bst;
 
 bst* create() {
-	// Your code here
+	bst *t = (bst*)malloc(sizeof(bst));	
+	t->pRoot = NULL;
+	
+	return t;
 }
 
 void insert(bst *t, int x) {
-	// Your code here
+	sNode *newNode = (sNode*)malloc(sizeof(sNode));
+	newNode->data = x;
+	newNode->pLeft = NULL;
+	newNode->pRight = NULL;
+	
+	if (t->pRoot == NULL){
+		t->pRoot = newNode;
+	}
+	
+	else{
+		sNode *prev = NULL;
+		sNode *temp = t->pRoot;
+		
+		while (temp != NULL){
+			if (temp->data > x){
+				prev = temp;
+				temp = temp->pLeft;
+			}
+			else if (temp->data < x){
+				prev = temp;
+				temp = temp->pRight;
+			}
+		}
+		if (prev->data > x)
+			prev->pLeft = newNode;
+		else
+			prev->pRight = newNode;
+	}
 }
 
 sNode* search(bst *t, int x) {
-	// Your code here
+	sNode *root = t->pRoot;
+	while (root != NULL && root->data != x){
+		
+		if (x < root->data)
+			root = root->pLeft;
+		else 
+			root = root->pRight;
+	}
+	return root;
 }
 
 void inorder(sNode *pPointer) {
-	// Your code here
+	if (pPointer == NULL)
+		return;
+	inorder(pPointer->pLeft);
+	printf("%d ", pPointer->data);
+	inorder(pPointer->pRight);
 }
 
 void preorder(sNode *pPointer) {
-	// Your code here
+	if (pPointer == NULL)
+		return;
+	printf("%d ", pPointer->data);
+	preorder(pPointer->pLeft);
+	preorder(pPointer->pRight);
 }
 
 void postorder(sNode *pPointer) {
-	// Your code here
+	if (pPointer == NULL)
+		return;
+	postorder(pPointer->pLeft);
+	postorder(pPointer->pRight);
+	printf("%d ", pPointer->data);
 }
-
+/*
 sNode* maximum(sNode *pPointer) {
 	// Your code here
 }
@@ -52,11 +102,91 @@ sNode* minimum(sNode *pPointer) {
 sNode* parent(bst *t, int x) {
 	// Your code here
 }
+*/
 
+/*
+sNode* search(bst *t, int x) {
+	sNode *root = t->pRoot;
+	while (root != NULL && root->data != x){
+		
+		if (x < root->data)
+			root = root->pLeft;
+		else 
+			root = root->pRight;
+	}
+	return root;
+}
+*/
 sNode* successor(bst *t, int x) {
-	// Your code here
+
+	sNode* root = t->pRoot;
+	sNode* n = search(t, x);
+
+	// checks if the right tree is null
+	if( n-> pRight != NULL){
+		int right = minimum(n-> pRight);
+		return minimum(n-> pRight);
+	}
+
+	// looks for the parent
+	sNode* p = parent(t, x);
+
+	int p2;
+
+	while(p != NULL && x == p->pRight){
+		x = p;
+		p = parent(t,p);
+	}
+
+	return p;
+
+	/*
+	if(right of x != NIL)
+	return TREE-MINIMUM(right of x);
+
+	y = parent of x;
+	while(y != NIL && x == right of y) {
+		x = y;
+		y = parent of y;
+	}
+	return y;
+	*/	
+
 }
 
 sNode* predecessor(bst *t, int x) {
-	// Your code here
+
+	sNode* root = t->pRoot;
+	sNode* n = search(t, x);
+
+	// checks if the right tree is null
+	if( n-> pRight != NULL){
+		int right = maximum(n-> pLeft);
+		return maximum(n-> pLeft);
+	}
+
+	// looks for the parent
+	sNode* p = parent(t, x);
+
+	int p2;
+
+	while(p != NULL && x == p->pRight){
+		x = p;
+		p = parent(t,p);
+	}
+
+	return p;
+
+	/*
+	if(left of x != NIL)
+		return TREE-MAXIMUM(left of x);
+
+	y = parent of x;
+	while(y != NIL && x == left of y) {
+		x = y;
+		y = parent of y;
+	}
+	return y;
+	*/
 }
+
