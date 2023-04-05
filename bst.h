@@ -90,74 +90,103 @@ void postorder(sNode *pPointer) {
 	postorder(pPointer->pRight);
 	printf("%d ", pPointer->data);
 }
-/*
+
+
 sNode* maximum(sNode *pPointer) {
 	// Your code here
+	if(pPointer == NULL){
+        return NULL; //no value in the tree
+	}
+    else if(pPointer -> pRight == NULL){
+        return pPointer; //no more right subtree meaning max is found
+	}
+    else {
+        return maximum(pPointer->pRight); //iterates until max is found
+	}
 }
 
 sNode* minimum(sNode *pPointer) {
 	// Your code here
+	if(pPointer == NULL) {
+        return NULL; //no value in the tree
+	}
+    else if(pPointer -> pLeft == NULL) {
+        return pPointer; //no more left subtree meaning min is found
+	}
+    else {
+        return minimum(pPointer->pLeft); //iterates until min is found
+	}
 }
 
 sNode* parent(bst *t, int x) {
 	// Your code here
-}
-*/
 
-/*
-sNode* search(bst *t, int x) {
-	sNode *root = t->pRoot;
-	while (root != NULL && root->data != x){
-		
-		if (x < root->data)
+
+	sNode *root = t->pRoot;	
+	if(root == NULL)
+		return NULL;
+	
+	sNode *tempParent = NULL;
+	
+	while(root != NULL) {
+		if(x < root->data){ //if value is less than node
+			tempParent = root; 
 			root = root->pLeft;
-		else 
+
+		} else if (x > root->data){ //if value is more than node
+			tempParent = root;
 			root = root->pRight;
+		} else { 
+			break;
+		}
+
 	}
-	return root;
+
+	return tempParent;
+
 }
-*/
+
+
+
 sNode* successor(bst *t, int x) {
 
-	sNode* root = t->pRoot;
+	//sNode* root = t->pRoot;
 	sNode* n = search(t, x);
 
 	// checks if the right tree is null
-	if( n-> pRight != NULL){
-		int right = minimum(n-> pRight);
+	if( n-> pRight != NULL)
 		return minimum(n-> pRight);
-	}
+	
 
-	// looks for the parent
+	// looks for the parent if there is no right subtree
 	sNode* p = parent(t, x);
 
-	while(p != NULL && x == p->pRight){
-		x = p;
-		p = parent(t,p);
+	while(p != NULL && n == p->pRight){
+		n = p;
+		p = parent(t,p->data);
 	}
 
 	return p;
 
-
 }
+
 
 sNode* predecessor(bst *t, int x) {
 
-	sNode* root = t->pRoot;
+	//sNode* root = t->pRoot;
 	sNode* n = search(t, x);
 
 	// checks if the right tree is null
-	if( n-> pRight != NULL){
-		int right = maximum(n-> pLeft);
+	if( n-> pLeft != NULL)
 		return maximum(n-> pLeft);
-	}
+	
 
-	// looks for the parent
+	// looks for the parent if there is no left subtre
 	sNode* p = parent(t, x);
 
-	while(p != NULL && x == p->pRight){
-		x = p;
-		p = parent(t,p);
+	while(p != NULL && n == p->pLeft){
+		n = p;
+		p = parent(t,p->data);
 	}
 
 	return p;
