@@ -140,17 +140,6 @@ sNode* successor(bst *t, int x) {
 
 	return p;
 
-	/*
-	if(right of x != NIL)
-	return TREE-MINIMUM(right of x);
-
-	y = parent of x;
-	while(y != NIL && x == right of y) {
-		x = y;
-		y = parent of y;
-	}
-	return y;
-	*/	
 
 }
 
@@ -177,16 +166,6 @@ sNode* predecessor(bst *t, int x) {
 
 	return p;
 
-	/*
-	if(left of x != NIL)
-		return TREE-MAXIMUM(left of x);
-
-	y = parent of x;
-	while(y != NIL && x == left of y) {
-		x = y;
-		y = parent of y;
-	}
-	return y;
-	*/
+	
 }
 
