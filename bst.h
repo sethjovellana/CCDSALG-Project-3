@@ -56,11 +56,14 @@ void insert(bst *t, int x) {
 }
 
 sNode* search(bst *t, int x) {
-	sNode *root = t->pRoot;
+	sNode *root = t->pRoot; // temp snode pointer that gets the root of the tree
 	while (root != NULL && root->data != x){
-		
+	/* root is not equal to null, havent traversed the whole tree
+		root data is not eqaul to x which means the x has not been found
+	*/
 		if (x < root->data)
 			root = root->pLeft;
+			// 
 		else 
 			root = root->pRight;
 	}
@@ -68,9 +71,9 @@ sNode* search(bst *t, int x) {
 }
 
 void inorder(sNode *pPointer) {
-	if (pPointer == NULL)
+	if (pPointer == NULL) // if the pointer is null then that is it. 
 		return;
-	inorder(pPointer->pLeft);
+	inorder(pPointer->pLeft); // follows 
 	printf("%d ", pPointer->data);
 	inorder(pPointer->pRight);
 }
@@ -151,18 +154,18 @@ sNode* parent(bst *t, int x) {
 sNode* successor(bst *t, int x) {
 
 	//sNode* root = t->pRoot;
-	sNode* n = search(t, x);
+	sNode* suc = search(t, x);
 
 	// checks if the right tree is null
-	if( n-> pRight != NULL)
-		return minimum(n-> pRight);
+	if( suc-> pRight != NULL)
+		return minimum(suc-> pRight);
 	
 
 	// looks for the parent if there is no right subtree
 	sNode* p = parent(t, x);
 
-	while(p != NULL && n == p->pRight){
-		n = p;
+	while(p != NULL && suc == p->pRight){
+		suc = p;
 		p = parent(t,p->data);
 	}
 
@@ -174,18 +177,18 @@ sNode* successor(bst *t, int x) {
 sNode* predecessor(bst *t, int x) {
 
 	//sNode* root = t->pRoot;
-	sNode* n = search(t, x);
+	sNode* pre = search(t, x);
 
-	// checks if the right tree is null
-	if( n-> pLeft != NULL)
-		return maximum(n-> pLeft);
+	// checks if there is left sub-tree is null
+	if( pre-> pLeft != NULL)
+		return maximum(pre-> pLeft);
 	
 
-	// looks for the parent if there is no left subtre
+	// looks for the parent if there is no left sub-tree
 	sNode* p = parent(t, x);
 
-	while(p != NULL && n == p->pLeft){
-		n = p;
+	while(p != NULL && pre == p->pLeft){
+		pre = p;
 		p = parent(t,p->data);
 	}
 
